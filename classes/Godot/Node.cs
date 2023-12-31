@@ -9,6 +9,8 @@ namespace Godot;
 using GodotEGP;
 using GodotEGP.Logging;
 
+using GodotEGPNonGame.ServiceWorkers;
+
 public partial class Node : GodotObject
 {
 	public string Name { get; set; }
@@ -38,6 +40,11 @@ public partial class Node : GodotObject
 		
 	}
 
+	public virtual void _PhysicsProcess(double delta)
+	{
+		
+	}
+
 	public virtual void _UnhandledInput(InputEvent @event)
 	{
 		
@@ -55,7 +62,7 @@ public partial class Node : GodotObject
 
 	public void AddChild(Node node)
 	{
-		LoggerManager.LogDebug("TODO: implement AddChild with fake Node mainloop");
+		SceneTreeServiceWorker.AddChild(node);
 	}
 
 	public void SetMeta(string id, string value)
