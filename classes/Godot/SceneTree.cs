@@ -7,6 +7,7 @@
 namespace Godot;
 
 using GodotEGP.Logging;
+using GodotEGP.Misc;
 
 public partial class SceneTree : Node
 {
@@ -44,6 +45,8 @@ public partial class SceneTree : Node
 			LoggerManager.LogDebug("", "", "nodeParent", $"id:{node.Parent.GetInstanceId()} name:{node.Parent.Name} type:{node.Parent.GetType().FullName}");
 
 			Nodes.Add(node);
+
+			Instance.EmitSignal(StringNames.Instance["node_added"]);
 
 			node._Ready();
 		}
