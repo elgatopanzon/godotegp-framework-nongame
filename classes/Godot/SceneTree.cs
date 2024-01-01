@@ -8,6 +8,8 @@ namespace Godot;
 
 using GodotEGP.Logging;
 using GodotEGP.Misc;
+using GodotEGP.Objects.Extensions;
+using GodotEGP.Event.Events;
 
 public partial class SceneTree : Node
 {
@@ -46,9 +48,9 @@ public partial class SceneTree : Node
 
 			Nodes.Add(node);
 
-			Instance.EmitSignal(StringNames.Instance["node_added"]);
-
 			node._Ready();
+
+			Instance.EmitSignal(StringNames.Instance["node_added"]);
 		}
 	}
 
