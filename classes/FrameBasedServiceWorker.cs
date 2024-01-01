@@ -33,9 +33,6 @@ public partial class FrameBasedServiceWorker : BackgroundService
         
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-    	// run initially once
-        await Run();
-
         while (!stoppingToken.IsCancellationRequested)
         {
         	// calculate delta time
