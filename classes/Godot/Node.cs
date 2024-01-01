@@ -112,7 +112,8 @@ public partial class Node : GodotObject
 
 	public void CallDeferred(string methodName)
 	{
-		// TODO: implement this
+		var callable = new Callable(this, methodName);
+		callable.Call();
 	}
 
 	public string GetPath()
