@@ -6,7 +6,7 @@
 
 namespace Godot;
 
-public partial class Viewport
+public partial class Viewport : Node
 {
 	public Viewport()
 	{

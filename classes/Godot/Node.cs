@@ -14,6 +14,12 @@ using GodotEGPNonGame.ServiceWorkers;
 public partial class Node : GodotObject
 {
 	public string Name { get; set; }
+	public Node Parent { get; set; }
+
+	public int Id
+	{
+		get { return GetHashCode(); }
+	}
 
 	public string SceneFilePath { get; set; }
 
@@ -25,9 +31,38 @@ public partial class Node : GodotObject
 		SceneFilePath = "";
 	}
 
+	public string GetInstanceId()
+	{
+		return Id.ToString();
+	}
+
 	public Viewport GetViewport()
 	{
-		return new Viewport();
+		return SceneTree.Instance.Root;
+	}
+
+	public SceneTree GetTree()
+	{
+		return SceneTree.Instance;
+	}
+
+	public void AddChild(Node node)
+	{
+		// set self as the parent node
+		node.Parent = this;
+
+		// add the node to the SceneTree
+		SceneTree.Instance.AddNode(node);
+	}
+
+	public List<Node> GetChildren()
+	{
+		return SceneTree.Instance.GetNodeChildren(this);
+	}
+
+	public int GetChildCount()
+	{
+		return GetChildren().Count;
 	}
 
 	public virtual void _Ready()
@@ -60,11 +95,6 @@ public partial class Node : GodotObject
 		return false;
 	}
 
-	public void AddChild(Node node)
-	{
-		SceneTreeServiceWorker.AddChild(node);
-	}
-
 	public void SetMeta(string id, string value)
 	{
 		
@@ -85,11 +115,6 @@ public partial class Node : GodotObject
 		// TODO: implement this
 	}
 
-	public List<Node> GetChildren()
-	{
-		return new List<Node>() {}; // TODO: implement
-	}
-
 	public string GetPath()
 	{
 		return ""; // TODO: implement
@@ -100,9 +125,5 @@ public partial class Node : GodotObject
 		return new List<string>() {}; // TODO: implement
 	}
 
-	public SceneTree GetTree()
-	{
-		return new SceneTree();
-	}
 }
 
