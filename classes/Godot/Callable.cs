@@ -32,6 +32,8 @@ public partial class Callable
 
 	public Callable(Object obj, string method)
 	{
+		_object = obj;
+		_method = method;
 	}
 
 	public void Call(Variant v = null)
