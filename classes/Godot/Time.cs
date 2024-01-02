@@ -8,6 +8,8 @@ namespace Godot;
 
 public partial class Time
 {
+	private static DateTime _firstAccess = DateTime.Now;
+
 	public Time()
 	{
 		
@@ -15,7 +17,7 @@ public partial class Time
 
 	public static ulong GetTicksMsec()
 	{
-		return 0; // TODO: attempt to implement this
+		return (ulong) (DateTime.Now - Time._firstAccess).TotalMilliseconds;
 	}
 }
 
