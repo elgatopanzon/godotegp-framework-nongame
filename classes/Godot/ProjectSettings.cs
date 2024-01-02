@@ -15,7 +15,19 @@ public partial class ProjectSettings
 
 	public static string GlobalizePath(string path)
 	{
-		return "";
+		// res:// path points to executable path/project root
+		if (path.StartsWith("res://"))
+		{
+			return Path.Combine(OS.GetExecutablePath(), path.Replace("res://", ""));
+		}
+		else if (path.StartsWith("user://"))
+		{
+			return Path.Combine(OS.GetUserDataDir(), path.Replace("user://", ""));
+		}
+		else
+		{
+			return path;
+		}
 	}
 }
 

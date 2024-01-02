@@ -20,7 +20,20 @@ public partial class OS
 
 	public static string GetUserDataDir()
 	{
-		return "";
+		string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
+
+		// create the local directory for the project if it doesn't exist
+		bool exists = System.IO.Directory.Exists(path);
+
+		if(!exists)
+    		System.IO.Directory.CreateDirectory(path);
+
+		return path;
+	}
+
+	public static string GetExecutablePath()
+	{
+		return Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName);
 	}
 }
 
