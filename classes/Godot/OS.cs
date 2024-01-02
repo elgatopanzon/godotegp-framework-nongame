@@ -15,7 +15,11 @@ public partial class OS
 
 	public static bool IsDebugBuild()
 	{
-		return true; // TODO: make this better
+#if DEBUG
+		return true;
+#else
+		return false;
+#endif
 	}
 
 	public static string GetUserDataDir()
