@@ -6,11 +6,13 @@
 
 namespace Godot;
 
+using GodotEGP.Logging;
+
 public static partial class ExtensionMethods
 {
-	public static string GetFile(this string obj)
+	public static string GetFile(this string path)
 	{
-		return obj; // TODO: implement this method
+		return Path.GetFileName(path);
 	}
 }
 
