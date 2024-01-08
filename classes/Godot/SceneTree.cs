@@ -36,6 +36,8 @@ public partial class SceneTree : Node
 
 	public SceneTree()
 	{
+		LoggerManager.LogDebug("Creating SceneTree instance");
+
 		_root = new Viewport();
 	}
 
@@ -59,45 +61,28 @@ public partial class SceneTree : Node
 		// set nodes to root node list to start things off
 		if (nodes == null)
 		{
-			nodes = SceneTree.Instance.Root.GetChildren();
-
-			// LoggerManager.LogDebug("Processing root nodes count", "", "nodeCount", nodes.Count);
+			nodes = GetNodeChildren(SceneTree.Instance.Root);
 		}
-
-		// LoggerManager.LogDebug("Processing node set started", "", "nodeSet", nodes.GetHashCode());
 
 		// recurssively process nodes in the scene tree
 		foreach (Node node in nodes)
 		{
-			// LoggerManager.LogDebug("Processing node", "", "node", $"id:{node.GetInstanceId()} p_id:{node.Parent.GetInstanceId()} name:{node.Name} type:{node.GetType().FullName}");
-
 			node._Process(delta.TotalMilliseconds / 1000);
 			node._PhysicsProcess(delta.TotalMilliseconds / 1000);
 
-			if (node.GetChildCount() > 0)
-			{
-				// LoggerManager.LogDebug("Processing node children", "", "node", $"id:{node.GetInstanceId()} p_id:{node.Parent.GetInstanceId()} name:{node.Name} type:{node.GetType().FullName}");
+			var children = GetNodeChildren(node);
 
-				ProcessNodes(delta, node.GetChildren());
+			if (children.Count > 0)
+			{
+				ProcessNodes(delta, children);
 			}
 		}
-
-		// LoggerManager.LogDebug("Processing node set finished", "", "nodeSet", nodes.GetHashCode());
 	}
 
+	// called by node.GetChildren()
 	public List<Node> GetNodeChildren(Node node)
 	{
-		List<Node> children = new();
-
-		foreach (Node n in Nodes)
-		{
-			if (n.Parent == node)
-			{
-				children.Add(n);
-			}
-		}
-
-		return children;
+		return Nodes.Where((x) => x.Parent == node).ToList();
 	}
 }
 
