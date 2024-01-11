@@ -79,10 +79,21 @@ public partial class SceneTree : Node
 		}
 	}
 
-	// called by node.GetChildren()
 	public List<Node> GetNodeChildren(Node node)
 	{
-		return Nodes.Where((x) => x.Parent == node).ToList();
+		List<Node> children = new();
+
+		foreach (Node n in Nodes)
+		{
+			if (n.Parent == node)
+			{
+				children.Add(n);
+			}
+		}
+
+		return children;
+
+		// return Nodes.Where((x) => x.Parent == node).ToList();
 	}
 }
 
