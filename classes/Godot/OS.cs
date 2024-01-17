@@ -6,6 +6,8 @@
 
 namespace Godot;
 
+using System.IO;
+
 public partial class OS
 {
 	public OS()
@@ -37,7 +39,11 @@ public partial class OS
 
 	public static string GetExecutablePath()
 	{
+#if DEBUG
 		return Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName);
+#else
+		return Path.Combine(Directory.GetParent(new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).Directory.FullName).Parent.FullName);
+#endif
 	}
 }
 
