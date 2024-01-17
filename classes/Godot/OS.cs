@@ -26,7 +26,7 @@ public partial class OS
 
 	public static string GetUserDataDir()
 	{
-		string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
+		string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), System.Reflection.Assembly.GetEntryAssembly().GetName().Name+"_Data");
 
 		// create the local directory for the project if it doesn't exist
 		bool exists = System.IO.Directory.Exists(path);
