@@ -31,8 +31,6 @@ public partial class GodotObject
 
 	public void EmitSignal(StringName signal, Variant v = null)
 	{
-		LoggerManager.LogDebug("Emitting signal", "", "signal", signal);
-
 		if (v != null)
 		{
 			ServiceRegistry.Get<EventManager>().__On_Signal(this, signal, v);
