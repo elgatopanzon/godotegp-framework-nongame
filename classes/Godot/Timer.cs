@@ -44,23 +44,17 @@ public partial class Timer : Node
 			Start();
 		}
 
-		LoggerManager.LogDebug("Starting timer", "", "waitTime", WaitTime);
-
 		TimeLeft = WaitTime;
 		_running = true;
 	}
 
 	public void Stop()
 	{
-		LoggerManager.LogDebug("Stopping timer", "", "waitTime", WaitTime);
-
 		TimeLeft = 0;
 	}
 
 	private void Finished()
 	{
-		LoggerManager.LogDebug("Timer finished", "", "waitTime", WaitTime);
-
 		Stop();
 		_running = false;
 
