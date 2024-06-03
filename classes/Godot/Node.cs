@@ -55,6 +55,11 @@ public partial class Node : GodotObject
 		SceneTree.Instance.AddNode(node);
 	}
 
+	public void RemoveChild(Node node)
+	{
+		SceneTree.Instance.RemoveNode(node);
+	}
+
 	public List<Node> GetChildren()
 	{
 		return SceneTree.Instance.GetNodeChildren(this);

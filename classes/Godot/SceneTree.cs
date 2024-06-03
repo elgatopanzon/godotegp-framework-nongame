@@ -56,6 +56,11 @@ public partial class SceneTree : Node
 		}
 	}
 
+	public void RemoveNode(Node node)
+	{
+		Nodes.Remove(node);
+	}
+
 	public void ProcessNodes(TimeSpan delta, List<Node> nodes = null)
 	{
 		// set nodes to root node list to start things off
