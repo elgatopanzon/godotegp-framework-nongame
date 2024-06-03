@@ -24,6 +24,9 @@ public partial class SceneTree : Node
 
 	public static List<Node> Nodes = new();
 
+	// dummy property
+	public Node CurrentScene { get; set; }
+
 	// Lazy singleton instance
 	private static readonly Lazy<SceneTree> _instance = 
 		new Lazy<SceneTree>(

@@ -29,5 +29,10 @@ public partial class GD
 	{
 		return new Resource(); // TODO: implement
 	}
+
+	public static T Load<T>(string path) where T : Resource
+	{
+		return (T) new Resource(); // TODO: implement
+	}
 }
 
