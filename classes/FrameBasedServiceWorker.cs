@@ -50,7 +50,14 @@ public partial class FrameBasedServiceWorker : BackgroundService
 				if (_taskRunCounter.TotalSeconds >= _taskRunTimeoutSec)
 				{
 					_taskRunCounter = new TimeSpan();
-            		await Run();
+					try
+					{
+            			await Run();
+					}
+					catch (System.Exception e)
+					{
+						LoggerManager.LogDebug("Exception during task run", "", "e", e);
+					}
 				}
 
 				var _elapsedTime = DateTime.Now - _startTime;
