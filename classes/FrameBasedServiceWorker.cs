@@ -30,6 +30,11 @@ public partial class FrameBasedServiceWorker : BackgroundService
 	{
         LoggerManager.LogDebug("Init background service task");
 	}
+
+	public void SetTargetFps(double targetFps = 60)
+	{
+		_targetFps = targetFps;
+	}
         
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
